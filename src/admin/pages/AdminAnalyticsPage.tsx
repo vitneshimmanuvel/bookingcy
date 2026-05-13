@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { firebaseGetActivity, firebaseGetUsers } from '../../lib/firebaseAuth';
-import { BarChart3, User, Calendar, RefreshCw, ChevronDown, TrendingUp, Clock, Edit3, Download, Shield, LogIn, Filter, X } from 'lucide-react';
+import { BarChart3, User, Calendar, RefreshCw, ChevronDown, TrendingUp, Clock, Edit3, Download, Shield, LogIn, X } from 'lucide-react';
 
 interface UserStat {
   id: string; name: string; email: string;

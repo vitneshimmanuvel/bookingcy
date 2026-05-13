@@ -76,14 +76,14 @@ export default function RegisterPage() {
   }, [user]);
 
   // Helper to log workspace actions for activity tracking
-  const logWork = useCallback((action: string, details: string) => {
+  const _logWork = useCallback((action: string, details: string) => {
     if (user?.id) {
       firebaseLogWorkspaceAction(user.id as string, (user as any)?.name || user?.email || 'Unknown', action, details);
     }
   }, [user]);
 
   // Helper to parse column restriction strings like "1,3,5-8" into a Set of 0-indexed column indices
-  const parseColumnRestriction = (value: any): Set<number> | null => {
+  const _parseColumnRestriction = (value: any): Set<number> | null => {
     if (Array.isArray(value)) return new Set(value);
     if (typeof value === 'string' && value.trim()) {
       const allowed = new Set<number>();
@@ -123,7 +123,7 @@ export default function RegisterPage() {
     return false;
   }, [user, registerId]);
 
-  const canDownloadAny = useMemo(() => {
+  const _canDownloadAny = useMemo(() => {
     if (!user || (user as any).permissions?.isAdmin || (user as any).role === 'admin' || (user as any).role === 'superadmin') return true;
     // sheet_admin cannot download
     if ((user as any).role === 'sheet_admin') return false;
@@ -137,7 +137,7 @@ export default function RegisterPage() {
     return true;
   }, [user, registerId]);
 
-  const canEditAny = useMemo(() => {
+  const _canEditAny = useMemo(() => {
     if (!user || (user as any).permissions?.isAdmin || (user as any).permissions?.fullSheetAccess || (user as any).role === 'admin' || (user as any).role === 'superadmin' || (user as any).role === 'sheet_admin') return true;
     // Check global edit flag first
     if (!(user as any).permissions?.canEdit) return false;
@@ -149,13 +149,13 @@ export default function RegisterPage() {
     return true;
   }, [user, registerId]);
 
-  const canCreateAny = useMemo(() => {
+  const _canCreateAny = useMemo(() => {
     if (!user || (user as any).permissions?.isAdmin || (user as any).permissions?.fullSheetAccess || (user as any).role === 'admin' || (user as any).role === 'superadmin' || (user as any).role === 'sheet_admin') return true;
     const createRest = (user as any).permissions?.createRestrictions;
     return createRest && createRest[registerId] === true;
   }, [user, registerId]);
 
-  const editableColumnIds = useMemo(() => {
+  const _editableColumnIds = useMemo(() => {
     if (!user || (user as any).permissions?.isAdmin || (user as any).permissions?.fullSheetAccess || (user as any).role === 'admin' || (user as any).role === 'superadmin' || (user as any).role === 'sheet_admin') return null; // null means all
     if (!(user as any).permissions?.canEdit) return new Set<number>(); // empty set means none
     
@@ -191,7 +191,7 @@ export default function RegisterPage() {
   }, [user, registerId, isAdminUserTop]);
 
   // Row-level edit restrictions
-  const rowEditRange = useMemo(() => {
+  const _rowEditRange = useMemo(() => {
     if (!user || isAdminUserTop) return null;
     const rer = (user as any).permissions?.rowEditRestrictions;
     if (rer && rer[registerId]) return rer[registerId];
@@ -228,7 +228,7 @@ export default function RegisterPage() {
   }, [user, registerId, register?.columns]);
 
   // Column-level view restrictions — only these columns should be visible
-  const viewableColumnIds = useMemo(() => {
+  const _viewableColumnIds = useMemo(() => {
     if (!user || (user as any).permissions?.isAdmin || (user as any).permissions?.fullSheetAccess || (user as any).role === 'admin' || (user as any).role === 'superadmin' || (user as any).role === 'sheet_admin') return null; // null = all
     
     const viewRest = (user as any).permissions?.viewRestrictions;

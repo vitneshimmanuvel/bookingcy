@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react';
 import type { User } from './api';
-import { firebaseGetMe, firebaseLogout, ensureDefaultAdmin } from './firebaseAuth';
+import { firebaseGetMe, ensureDefaultAdmin } from './firebaseAuth';
 
 const TOKEN_KEY = 'recordbook_token';
 const USER_KEY = 'recordbook_user';

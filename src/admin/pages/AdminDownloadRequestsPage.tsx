@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../lib/auth';
 import { firebaseGetAllDownloadRequests, firebaseRespondDownloadRequest } from '../../lib/firebaseAuth';
-import { Download, CheckCircle, XCircle, Clock, RefreshCw, Filter, User, ChevronDown, X, Send, MessageSquare, Calendar } from 'lucide-react';
+import { Download, CheckCircle, XCircle, Clock, RefreshCw, Filter, User, ChevronDown, Send, MessageSquare, Calendar } from 'lucide-react';
 
 export default function AdminDownloadRequestsPage() {
   const { user } = useAuth();
